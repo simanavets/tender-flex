@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -18,6 +21,13 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     private RoleName name;
+
+    @ManyToMany
+    @JoinTable(name = "role_privilege",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "privilege_id")
+    )
+    private List<Privilege> privileges = new ArrayList<>();
 }
 
 enum RoleName implements GrantedAuthority {
