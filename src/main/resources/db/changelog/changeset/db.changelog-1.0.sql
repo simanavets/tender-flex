@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS role_privilege
 CREATE TABLE IF NOT EXISTS users
 (
     id       BIGSERIAL PRIMARY KEY,
-    username VARCHAR(128) NOT NULL UNIQUE,
+    user_name VARCHAR(128) NOT NULL UNIQUE,
     password VARCHAR(128) NOT NULL,
     email    VARCHAR(128) NOT NULL UNIQUE,
     role_id  INT REFERENCES role (id)
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS users
 
 CREATE TABLE IF NOT EXISTS tender
 (
-    id      SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users (id)
+    id      BIGSERIAL PRIMARY KEY,
+    user_id BIGINT REFERENCES users (id)
 );
 
 --rollback DROP TABLE tender;
@@ -58,9 +58,9 @@ CREATE TABLE IF NOT EXISTS tender
 
 CREATE TABLE IF NOT EXISTS offer
 (
-    id        SERIAL PRIMARY KEY,
+    id        BIGSERIAL PRIMARY KEY,
     user_id   BIGINT REFERENCES users (id),
-    tender_id INT REFERENCES tender (id)
+    tender_id BIGINT REFERENCES tender (id)
 );
 
 --rollback DROP TABLE offer;
@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS offer
 
 CREATE TABLE IF NOT EXISTS contract
 (
-    id        SERIAL PRIMARY KEY,
-    offer_id  INT REFERENCES offer (id),
-    tender_id INT REFERENCES tender (id),
+    id        BIGSERIAL PRIMARY KEY,
+    offer_id  BIGINT REFERENCES offer (id),
+    tender_id BIGINT REFERENCES tender (id),
     status    VARCHAR(128)
 );
 
