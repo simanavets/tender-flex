@@ -13,13 +13,13 @@ public class Contract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "offer_id")
     private Offer offer;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "tender_id")
     private Tender tender;
 
