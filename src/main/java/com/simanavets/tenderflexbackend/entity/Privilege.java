@@ -1,8 +1,9 @@
 package com.simanavets.tenderflexbackend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,7 @@ public class Privilege {
     private PrivilegeName name;
 
     @ManyToMany(mappedBy = "privileges")
-    @JsonBackReference
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
 
 }
