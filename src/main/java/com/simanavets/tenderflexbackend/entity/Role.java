@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 
@@ -28,6 +29,11 @@ public class Role {
     private List<Privilege> privileges;
 }
 
-enum RoleName {
-    BIDDER, CONTRACTOR
+enum RoleName implements GrantedAuthority {
+    BIDDER, CONTRACTOR;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
